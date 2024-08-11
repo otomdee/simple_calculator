@@ -1,0 +1,34 @@
+body {
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #77A6B6;
+}
+
+#maincontainer {
+    background-color: #DED6D1;
+    display: flex;
+    flex-direction: column;
+    height: 480px;
+    width: 300px;
+    padding: 15px;
+    border-radius: 25px;
+}
+
+#display {
+    background-color: #A4BAB7;
+    height: 20%;
+    border-radius: 25px;
+}
+
+#buttons {
+    height: 70%;
+    margin-top: 30px;
+}
+
+#topRow {
+    background-color: black;
+    height: 20px;
+}
