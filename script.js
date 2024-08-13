@@ -43,14 +43,49 @@ pageButtons.forEach((button) => {
     buttonVars[`${button.id}`] = button;
 })
 
-//add listeners to buttons
 let leftVar;
 let opVar;
-let rightVar;
+//store variables for left and right side of operation
+let opSwitch = 0;
+let leftCalc;
+let rightCalc;
+function setCalculation() {
+    //on clicking number button
+    if (opSwitch == 0) {
+        leftCalc = leftVar;
+    }
+    else if (opSwitch == 1) {
+        rightCalc = leftVar;   
+    }
+}
+//add listeners to buttons
 pageButtons.forEach((button) => {
     if (button.id !== "topAC" && button.id !== "topPlusMinus" && button.id !== "equal") {
-        button.addEventListener("click", () => {
-            display.innerHTML = `${button.id}`
-        })
+        if (button.id == "minus") {
+            button.addEventListener("click", () => {opVar = "-"
+                opSwitch++;});
+        }
+        else if (button.id == "plus") {
+            button.addEventListener("click", () => {opVar = "+"
+                opSwitch++;});
+        }
+        else if (button.id == "divide") {
+            button.addEventListener("click", () => {opVar = "/"
+                opSwitch++;});
+        }
+        else if (button.id == "multiply") {
+            button.addEventListener("click", () => {opVar = "*"
+                opSwitch++;});
+        }
+        else if (button.id !== "butPoint") {
+            button.addEventListener("click", () => {
+                leftVar = `${button.id.slice(3)}`;
+                setCalculation();
+            })
+        }
     }
 })
+
+document.querySelector("#equal")
+.addEventListener("click", () => 
+    {document.querySelector("#display").innerHTML = operate(parseInt(leftCalc), parseInt(rightCalc), opVar);})
