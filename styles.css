@@ -18,10 +18,19 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+button {
+    font-size: larger;
+}
+
 #display {
+    display: flex;
+    align-items: center;
     background-color: #A4BAB7;
     height: 20%;
     border-radius: 25px;
+    font-size: 270%;
+    padding: 10px;
+    font-family: "Times New Roman";
 }
 
 #buttons {
@@ -86,12 +95,14 @@ body {
     width: 70%;
     height: 30px;
     border-radius: 30px;
+    background-color: #ECCBD9;
 }
 
 #minus, #plus {
     height: 55px;
     width: 55px;
     border-radius: 30px;
+    background-color: #ECCBD9;
 }
 #plus {
     margin-bottom: 15px;

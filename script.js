@@ -1,35 +1,16 @@
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a/b;
-}
-
-function add(a, b) {
-    return a + b;
-}
-
-function minus(a, b) {
-    return a - b;
-}
-
-let left;
-let right;
-let operator;
-
+//add operations
 function operate(left, right, operator) {
     if (operator === "*") {
-        return multiply(left, right);
+        return left * right;
     }
     else if (operator === "/") {
-        return divide(left, right);
+        return left/right;
     }
     else if (operator === "+") {
-        return add(left, right);
+        return left + right;
     }
     else if (operator === "-") {
-        return minus(left, right);
+        return left - right;
     }
 }
 
@@ -53,26 +34,49 @@ function display(value) {
     displayScreen.innerHTML = displayArray.join("");
 }
 
+//turn off other operator buttons if any operator is clicked
+opSelectors = [
+    document.getElementById("minus"),
+    document.getElementById("plus"),
+    document.getElementById("divide"),
+    document.getElementById("multiply")
+]
+
+function buttonDisable() {
+    opSelectors.forEach((selector) => {
+        selector.disabled = true;
+    });
+}
+
+
 //add listeners to buttons
 pageButtons.forEach((button) => {
     if (button.id !== "topAC" && button.id !== "topPlusMinus" && button.id !== "equal") {
         if (button.id == "minus") {
             button.addEventListener("click", () => {
                 opVar = "-";
-                display("-")});
+                display("-");
+                buttonDisable();
+            });
         }
         else if (button.id == "plus") {
             button.addEventListener("click", () => {opVar = "+";
-                display("+")});
+                display("+")
+                buttonDisable();
+            });
         }
         else if (button.id == "divide") {
             button.addEventListener("click", () => {
                 opVar = "/";
-                display("÷")});
+                display("÷");
+                buttonDisable();
+            });
         }
         else if (button.id == "multiply") {
             button.addEventListener("click", () => {opVar = "*"
-                display("×")});
+                display("×")
+                buttonDisable();
+            });
         }
         else if (button.id !== "butPoint") {
             button.addEventListener("click", () => {
@@ -102,5 +106,28 @@ document.querySelector("#equal")
         }
     })
     const finalResult = operate(parseInt(leftCalc.join("")), parseInt(rightCalc.join("")), opVar);
-    displayScreen.innerHTML = finalResult;
+    displayScreen.innerHTML = Math.round(finalResult * 1000)/1000;
+    displayArray = [];
+    displayArray.push(Math.round(finalResult * 1000)/1000);
+    displayScreen.innerHTML = displayArray[0];
+    opSwitch = 0;
+    opSelectors.forEach((selector) => {
+        selector.disabled = false;
+    });
 })
+
+//clear all with A/C
+document.querySelector("#topAC").addEventListener("click", () => {
+    opSwitch = 0;
+    leftVar = 0;
+    leftCalc = [];
+    rightCalc = [];
+    displayArray = [];
+    opVar = "";
+    displayScreen.innerHTML = "";
+})
+
+//+/- and % (to be completed)
+
+document.getElementById("topPercent").disabled = true;
+document.getElementById("topPlusMinus").disabled = true;
