@@ -105,15 +105,23 @@ document.querySelector("#equal")
             rightCalc.push(item);
         }
     })
-    const finalResult = operate(parseInt(leftCalc.join("")), parseInt(rightCalc.join("")), opVar);
-    displayScreen.innerHTML = Math.round(finalResult * 1000)/1000;
-    displayArray = [];
-    displayArray.push(Math.round(finalResult * 1000)/1000);
-    displayScreen.innerHTML = displayArray[0];
-    opSwitch = 0;
-    opSelectors.forEach((selector) => {
-        selector.disabled = false;
-    });
+    if (parseInt(rightCalc.join("")) === 0 && opVar === "/") {
+        displayScreen.innerHTML = "Nah bro";
+        opSelectors.forEach((selector) => {
+            selector.disabled = false;
+        });
+    }
+    else {
+        const finalResult = operate(parseInt(leftCalc.join("")), parseInt(rightCalc.join("")), opVar);
+        displayScreen.innerHTML = Math.round(finalResult * 1000)/1000;
+        displayArray = [];
+        displayArray.push(Math.round(finalResult * 1000)/1000);
+        displayScreen.innerHTML = displayArray[0];
+        opSwitch = 0;
+        opSelectors.forEach((selector) => {
+            selector.disabled = false;
+        });
+    }
 })
 
 //clear all with A/C
@@ -127,7 +135,8 @@ document.querySelector("#topAC").addEventListener("click", () => {
     displayScreen.innerHTML = "";
 })
 
-//+/- and % (to be completed)
+//+/- , . , and % (to be completed)
 
 document.getElementById("topPercent").disabled = true;
 document.getElementById("topPlusMinus").disabled = true;
+document.getElementById("butPoint").disabled = true;
